@@ -1,21 +1,26 @@
-# Cloud CORPS Rating (higher is better)
-34/50 - Suitable for Production use.
+# Usage
 
-Cost: 2/10
-This module has a focus on production concerns that result in a higher cost. It should not be used for cost-sensitive deployments.
+### Basic deployment
+This example deploys a simple s3 bucket without backups, logging, replication, or encryption.
+```
+module "object storage" {
+  source  = "app.terraform.io/grantorchard/s3/aws"
+  version = "0.0.3"
 
-Observability: 8/10
-Logging is enabled.
-Metrics are enabled.
+	name = "blue"
+	environment = "development"
+}
+```
 
-Resilience: 10/10
-s3 buckets are distributed across availability zones by default.
-Replication is enabled.
-Backups are enabled.
+### Production deployment
+This example enables backups, logging, replication, and encryption.
+Suitable for production usage.
+```
+module "object storage" {
+  source  = "app.terraform.io/grantorchard/s3/aws"
+  version = "0.0.3"
 
-Performance: 6/10
-Objects placed in this bucket will sit on standard storage for 30 days then be handled by s3 intelligent tiering.
-
-Security: 8/10
-Public access is disabled.
-Encryption is enabled.
+	name = "blue"
+	environment = "production"
+}
+```
